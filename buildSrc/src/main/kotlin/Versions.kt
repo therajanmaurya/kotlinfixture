@@ -23,11 +23,11 @@ object Versions {
     const val detektGradlePlugin = "1.18.1"
     const val dokkaPlugin = "1.8.10"
     const val gradleMavenPublishPlugin = "0.18.0"
-    const val gradleVersionsPlugin = "0.36.0"
+    const val gradleVersionsPlugin = "0.51.0"
     const val markdownlintGradlePlugin = "0.6.0"
 
     const val classgraph = "4.8.157"
-    const val coroutines = "1.6.4"
+    const val coroutines = "1.9.0"
     const val generex = "1.0.2"
     const val javafaker = "1.0.2"
     const val jodaTime = "2.12.5"
@@ -45,9 +45,9 @@ object Versions {
     const val marcellogalhardo = "0.0.2"
 
     object AndroidX {
-        const val testCore = "1.5.0"
-        const val testExtJunit = "1.1.5"
-        const val testRunner = "1.5.2"
+        const val testCore = "1.6.1"
+        const val testExtJunit = "1.2.1"
+        const val testRunner = "1.6.2"
     }
 
     object KotlinX {

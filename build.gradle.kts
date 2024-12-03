@@ -29,6 +29,8 @@ plugins {
 buildscript {
     repositories {
         google()
+        mavenCentral()
+        maven { setUrl("https://jitpack.io") }
     }
     dependencies {
         classpath("com.android.tools.build:gradle:${Versions.androidGradlePlugin}")
@@ -39,11 +41,6 @@ apply(from = "$rootDir/gradle/scripts/dependencyUpdates.gradle.kts")
 apply(from = "$rootDir/owaspDependencyCheck.gradle.kts")
 
 allprojects {
-    repositories {
-        google()
-        mavenCentral()
-        maven { setUrl("https://jitpack.io") }
-    }
 
     version = (System.getenv("GITHUB_REF") ?: System.getProperty("GITHUB_REF"))
         ?.replaceFirst("refs/tags/", "") ?: "unspecified"

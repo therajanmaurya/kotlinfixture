@@ -18,7 +18,7 @@ object Versions {
 
     const val kotlin = "2.0.20"
 
-    const val androidGradlePlugin = "8.6.1"
+    const val androidGradlePlugin = "8.7.0"
     const val dependencyCheckGradlePlugin = "6.1.1"
     const val detektGradlePlugin = "1.18.1"
     const val dokkaPlugin = "1.8.10"

@@ -41,7 +41,7 @@ dependencies {
     compileOnly("org.ktorm:ktorm-core:${Versions.kTorm}")
     testImplementation("org.ktorm:ktorm-core:${Versions.kTorm}")
 
-    compileOnly(files("${System.getenv("ANDROID_HOME")}/platforms/android-29/android.jar"))
+    compileOnly(files("${System.getenv("ANDROID_HOME")}/platforms/android-34/android.jar"))
 
     testImplementation("junit:junit:${Versions.junit4}")
     testImplementation(kotlin("test"))

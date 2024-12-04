@@ -20,15 +20,9 @@ dependencyResolutionManagement {
         google()
         mavenCentral()
         maven {
-            name = "GithubPackages"
-            url = uri("https://maven.pkg.github.com/therajanmaurya/fixture")
-            credentials {
-                username = providers.gradleProperty("gpr.user").orNull
-                    ?: System.getenv("USERNAME")
-                password = providers.gradleProperty("gpr.key").orNull
-                    ?: System.getenv("TOKEN")
-            }
+            url = uri("https://s01.oss.sonatype.org/content/repositories/releases/")
         }
+        maven { url = uri("https://jitpack.io") }
     }
 }
 

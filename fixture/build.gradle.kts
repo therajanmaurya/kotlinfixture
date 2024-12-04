@@ -19,10 +19,8 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     kotlin("jvm")
     id("com.android.lint")
-    id("com.vanniktech.maven.publish")
-    id("org.jetbrains.dokka")
-    id("signing")
     id("maven-publish")
+    id("signing")
     id("org.jetbrains.kotlin.plugin.serialization") version Versions.kotlin
 }
 
@@ -82,13 +80,50 @@ tasks.named("check") {
 afterEvaluate {
     publishing {
         publications {
-            create<MavenPublication>("release") {
-                groupId = "com.github.therajanmaurya"
+            create<MavenPublication>("mavenJava") {
+                groupId = "io.github.therajanmaurya"
                 artifactId = "fixture"
-                version = "1.0.0"  // Update this version as needed
-                
+                version = "1.0.0"
+
                 from(components["java"])
+
+                pom {
+                    name.set("Kotlin Fixture")
+                    description.set("Fixtures for Kotlin providing generated values for unit testing")
+                    url.set("https://github.com/therajanmaurya/kotlinfixture")
+
+                    licenses {
+                        license {
+                            name.set("The Apache License, Version 2.0")
+                            url.set("http://www.apache.org/licenses/LICENSE-2.0.txt")
+                        }
+                    }
+
+                    developers {
+                        developer {
+                            id.set("therajanmaurya")
+                            name.set("Rajan Maurya")
+                            email.set("rajanmaurya154@gmail.com")
+                        }
+                    }
+
+                    scm {
+                        connection.set("scm:git:git://github.com/therajanmaurya/kotlinfixture.git")
+                        developerConnection.set("scm:git:ssh://github.com/therajanmaurya/kotlinfixture.git")
+                        url.set("https://github.com/therajanmaurya/kotlinfixture")
+                    }
+                }
             }
         }
     }
+
+    signing {
+        sign(publishing.publications["mavenJava"])
+    }
+}
+
+// This is sufficient to generate javadoc and sources JARs
+java {
+    withJavadocJar()
+    withSourcesJar()
 }

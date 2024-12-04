@@ -24,6 +24,7 @@ plugins {
     id("com.appmattus.markdown") version Versions.markdownlintGradlePlugin
     id("com.vanniktech.maven.publish") version Versions.gradleMavenPublishPlugin apply false
     id("org.jetbrains.dokka") version Versions.dokkaPlugin
+    id("io.github.gradle-nexus.publish-plugin") version "2.0.0"
 }
 
 buildscript {
@@ -89,4 +90,23 @@ detekt {
     autoCorrect = true
 
     config = files("detekt-config.yml")
+}
+
+nexusPublishing {
+    repositories {
+        sonatype {
+            nexusUrl.set(uri("https://s01.oss.sonatype.org/service/local/"))
+            snapshotRepositoryUrl.set(uri("https://s01.oss.sonatype.org/content/repositories/snapshots/"))
+            
+            packageGroup.set("io.github.therajanmaurya")
+            
+            username.set(providers.gradleProperty("sonatypeUsername").get())
+            password.set(providers.gradleProperty("sonatypePassword").get())
+        }
+    }
+    
+    transitionCheckOptions {
+        maxRetries.set(60)
+        delayBetween.set(java.time.Duration.ofSeconds(5))
+    }
 }

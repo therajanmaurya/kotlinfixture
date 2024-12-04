@@ -21,6 +21,7 @@ plugins {
     id("com.android.lint")
     id("com.vanniktech.maven.publish")
     id("org.jetbrains.dokka")
+    id("signing")
     id("maven-publish")
     id("org.jetbrains.kotlin.plugin.serialization") version Versions.kotlin
 }
@@ -41,7 +42,7 @@ dependencies {
     compileOnly("org.ktorm:ktorm-core:${Versions.kTorm}")
     testImplementation("org.ktorm:ktorm-core:${Versions.kTorm}")
 
-    compileOnly(files("${System.getenv("ANDROID_HOME")}/platforms/android-34/android.jar"))
+    compileOnly(files("/Users/rajan.maurya/Library/Android/sdk/platforms/android-34/android.jar"))
 
     testImplementation("junit:junit:${Versions.junit4}")
     testImplementation(kotlin("test"))

@@ -78,3 +78,17 @@ tasks.named("check") {
     finalizedBy(rootProject.tasks.named("detekt"))
     finalizedBy(rootProject.tasks.named("markdownlint"))
 }
+
+afterEvaluate {
+    publishing {
+        publications {
+            create<MavenPublication>("release") {
+                groupId = "com.github.therajanmaurya"
+                artifactId = "fixture"
+                version = "1.0.0"  // Update this version as needed
+                
+                from(components["java"])
+            }
+        }
+    }
+}

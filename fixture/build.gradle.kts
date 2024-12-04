@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+import com.vanniktech.maven.publish.SonatypeHost
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
@@ -22,6 +23,7 @@ plugins {
     id("maven-publish")
     id("signing")
     id("org.jetbrains.kotlin.plugin.serialization") version Versions.kotlin
+    id("com.vanniktech.maven.publish")
 }
 
 apply(from = "$rootDir/gradle/scripts/jacoco.gradle.kts")
@@ -77,48 +79,40 @@ tasks.named("check") {
     finalizedBy(rootProject.tasks.named("markdownlint"))
 }
 
-afterEvaluate {
-    publishing {
-        publications {
-            create<MavenPublication>("mavenJava") {
-                groupId = "io.github.therajanmaurya"
-                artifactId = "fixture"
-                version = "1.0.0"
+group = "io.github.therajanmaurya"
+version = "1.0.0"
 
-                from(components["java"])
+mavenPublishing {
+    publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL)
 
-                pom {
-                    name.set("Kotlin Fixture")
-                    description.set("Fixtures for Kotlin providing generated values for unit testing")
-                    url.set("https://github.com/therajanmaurya/kotlinfixture")
+    signAllPublications()
 
-                    licenses {
-                        license {
-                            name.set("The Apache License, Version 2.0")
-                            url.set("http://www.apache.org/licenses/LICENSE-2.0.txt")
-                        }
-                    }
+    coordinates("io.github.therajanmaurya", "kotlinfixture", "1.0.0")
 
-                    developers {
-                        developer {
-                            id.set("therajanmaurya")
-                            name.set("Rajan Maurya")
-                            email.set("rajanmaurya154@gmail.com")
-                        }
-                    }
-
-                    scm {
-                        connection.set("scm:git:git://github.com/therajanmaurya/kotlinfixture.git")
-                        developerConnection.set("scm:git:ssh://github.com/therajanmaurya/kotlinfixture.git")
-                        url.set("https://github.com/therajanmaurya/kotlinfixture")
-                    }
-                }
+    pom {
+        name = "Kotlin Fixture "
+        description = "A library providing kotlinfixture"
+        inceptionYear = "2024"
+        url = "https://github.com/therajanmaurya/kotlinfixture"
+        licenses {
+            license {
+                name = "Apache License, Version 2.0"
+                url = "https://www.apache.org/licenses/LICENSE-2.0.html"
+                distribution = "repo"
             }
         }
-    }
-
-    signing {
-        sign(publishing.publications["mavenJava"])
+        developers {
+            developer {
+                id = "therajanmaurya"
+                name = "Rajan Maurya"
+                url = "https://github.com/therajanmaurya"
+            }
+        }
+        scm {
+            url = "https://github.com/therajanmaurya/kotlinfixture"
+            connection = "scm:git:git://github.com/therajanmaurya/kotlinfixture.git"
+            developerConnection = "scm:git:ssh://git@github.com:therajanmaurya/kotlinfixture.git"
+        }
     }
 }
 

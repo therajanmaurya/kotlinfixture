@@ -86,7 +86,7 @@ mavenPublishing {
 
     signAllPublications()
 
-    coordinates("io.github.therajanmaurya", "kotlinfixture", "1.0.0")
+    coordinates("io.github.therajanmaurya", "fixture", "1.0.0")
 
     pom {
         name = "Kotlin Fixture "

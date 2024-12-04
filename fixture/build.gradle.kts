@@ -26,6 +26,7 @@ plugins {
     id("maven-publish")
     id("org.jetbrains.kotlin.plugin.serialization") version Versions.kotlin
     id("com.vanniktech.maven.publish")
+    id("org.jetbrains.dokka") version "1.9.20"
 }
 
 apply(from = "$rootDir/gradle/scripts/jacoco.gradle.kts")
@@ -85,6 +86,12 @@ group = "io.github.therajanmaurya"
 version = "1.0.0"
 
 mavenPublishing {
+
+   /* configure(KotlinJvm(
+        javadocJar = JavadocJar.Dokka("dokkaHtml"),
+        sourcesJar = true,
+    ))*/
+
     publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL, automaticRelease = true)
 
     signAllPublications()
@@ -92,7 +99,7 @@ mavenPublishing {
     coordinates("io.github.therajanmaurya", "fixture", "1.0.0")
 
     pom {
-        name = "Kotlin Fixture "
+        name = "Kotlin Fixture"
         description = "A library providing kotlinfixture"
         inceptionYear = "2024"
         url = "https://github.com/therajanmaurya/kotlinfixture"
@@ -118,8 +125,22 @@ mavenPublishing {
     }
 }
 
-// This is sufficient to generate javadoc and sources JARs
 java {
-    withJavadocJar()
+   // withJavadocJar()
     withSourcesJar()
+}
+
+tasks.withType<org.jetbrains.dokka.gradle.DokkaTask>().configureEach {
+    dokkaSourceSets {
+        configureEach {
+            skipDeprecated.set(true)
+            reportUndocumented.set(true)
+            jdkVersion.set(17)
+            sourceLink {
+                localDirectory.set(file("src/main/kotlin"))
+                remoteUrl.set(uri("https://github.com/therajanmaurya/kotlinfixture/blob/main").toURL())
+                remoteLineSuffix.set("#L")
+            }
+        }
+    }
 }

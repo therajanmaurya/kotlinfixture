@@ -26,7 +26,6 @@ plugins {
     id("maven-publish")
     id("org.jetbrains.kotlin.plugin.serialization") version Versions.kotlin
     id("com.vanniktech.maven.publish")
-    id("org.jetbrains.dokka") version "1.9.20"
 }
 
 apply(from = "$rootDir/gradle/scripts/jacoco.gradle.kts")
@@ -87,11 +86,6 @@ version = "1.0.0"
 
 mavenPublishing {
 
-   /* configure(KotlinJvm(
-        javadocJar = JavadocJar.Dokka("dokkaHtml"),
-        sourcesJar = true,
-    ))*/
-
     publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL, automaticRelease = true)
 
     signAllPublications()
@@ -121,26 +115,6 @@ mavenPublishing {
             url = "https://github.com/therajanmaurya/kotlinfixture"
             connection = "scm:git:git://github.com/therajanmaurya/kotlinfixture.git"
             developerConnection = "scm:git:ssh://git@github.com:therajanmaurya/kotlinfixture.git"
-        }
-    }
-}
-
-java {
-   // withJavadocJar()
-    withSourcesJar()
-}
-
-tasks.withType<org.jetbrains.dokka.gradle.DokkaTask>().configureEach {
-    dokkaSourceSets {
-        configureEach {
-            skipDeprecated.set(true)
-            reportUndocumented.set(true)
-            jdkVersion.set(17)
-            sourceLink {
-                localDirectory.set(file("src/main/kotlin"))
-                remoteUrl.set(uri("https://github.com/therajanmaurya/kotlinfixture/blob/main").toURL())
-                remoteLineSuffix.set("#L")
-            }
         }
     }
 }

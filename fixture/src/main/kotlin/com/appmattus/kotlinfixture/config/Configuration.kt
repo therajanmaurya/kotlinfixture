@@ -82,6 +82,7 @@ import kotlin.reflect.KType
  * @property strategies Strategy settings for altering the behaviour of [resolvers] and [decorators].
  * @property filters Sequence filters for generated values.
  */
+@ConsistentCopyVisibility
 data class Configuration internal constructor(
     val repeatCount: () -> Int = defaultRepeatCount,
     val propertiesRepeatCount: Map<KClass<*>, Map<String, () -> Int>> =

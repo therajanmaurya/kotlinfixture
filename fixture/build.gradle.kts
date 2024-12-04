@@ -14,6 +14,9 @@
  * limitations under the License.
  */
 
+import com.vanniktech.maven.publish.GradlePublishPlugin
+import com.vanniktech.maven.publish.JavadocJar
+import com.vanniktech.maven.publish.KotlinJvm
 import com.vanniktech.maven.publish.SonatypeHost
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 

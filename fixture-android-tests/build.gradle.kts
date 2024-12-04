@@ -19,7 +19,6 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     id("com.android.library")
     kotlin("android")
-    id("signing")
 }
 
 apply(from = "$rootDir/gradle/scripts/jacoco-android.gradle.kts")

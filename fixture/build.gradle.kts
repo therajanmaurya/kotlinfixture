@@ -21,7 +21,6 @@ plugins {
     kotlin("jvm")
     id("com.android.lint")
     id("maven-publish")
-    id("signing")
     id("org.jetbrains.kotlin.plugin.serialization") version Versions.kotlin
     id("com.vanniktech.maven.publish")
 }
@@ -83,7 +82,7 @@ group = "io.github.therajanmaurya"
 version = "1.0.0"
 
 mavenPublishing {
-    publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL)
+    publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL, automaticRelease = true)
 
     signAllPublications()
 
